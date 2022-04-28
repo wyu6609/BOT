@@ -5,7 +5,9 @@ import "./App.css";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import NavBar from "./NavBar";
+import Market from "../pages/Market";
 import Error from "../pages/Error";
+import Footer from "./Footer";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -26,15 +28,18 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
+          <Route path="/market">
+            <Market />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
-
           <Route path="*">
             <Error />
           </Route>
         </Switch>
       </main>
+      <Footer />
     </>
   );
 }

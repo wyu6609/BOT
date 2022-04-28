@@ -1,28 +1,5 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import { Button } from "@mui/material/";
-// const NavBar = ({ onLogin }) => {
-//   function handleLogoutClick() {
-//     fetch("/logout", { method: "DELETE" }).then((r) => {
-//       if (r.ok) {
-//         onLogin(null);
-//       }
-//     });
-//   }
-//   return (
-//     <nav>
-//       <Link to="/"> Home </Link>
-//       <Link to="/about"> About </Link>
-//       <Button variant="contained" onClick={handleLogoutClick}>
-//         Logout
-//       </Button>
-//     </nav>
-//   );
-// };
-
-// export default NavBar;
-
 import * as React from "react";
+import "./NavBar.css";
 import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -30,7 +7,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import SmartToyIcon from "@mui/icons-material/SmartToy";
+import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import LocalConvenienceStoreOutlinedIcon from "@mui/icons-material/LocalConvenienceStoreOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 function NavBar({ setUser }) {
   const logoutSound = () => {
@@ -42,6 +22,7 @@ function NavBar({ setUser }) {
       if (r.ok) {
         logoutSound();
         setUser(null);
+        window.location.reload(false);
       }
     });
   }
@@ -55,16 +36,31 @@ function NavBar({ setUser }) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            as={Link}
+            to="/"
           >
-            <SmartToyIcon />
+            <SmartToyOutlinedIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Button color="inherit">BOT MARKET</Button>
+            <IconButton
+              className="blink-1"
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              as={Link}
+              to="/market"
+            >
+              <LocalConvenienceStoreOutlinedIcon />
+            </IconButton>
           </Typography>
-          <Button color="inherit">Cart</Button>
-          <Button color="inherit" onClick={handleLogoutClick}>
-            Logout
-          </Button>
+          <IconButton color="inherit">
+            <ShoppingCartOutlinedIcon />
+          </IconButton>
+          <IconButton color="inherit" onClick={handleLogoutClick}>
+            <LogoutOutlinedIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>

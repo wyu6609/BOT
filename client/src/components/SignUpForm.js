@@ -1,101 +1,3 @@
-// import { React, useState } from "react";
-
-// const SignUpForm = ({ onLogin, loginSound, errorSound }) => {
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-
-//   const [firstName, setFirstName] = useState("");
-//   const [lastName, setLastName] = useState("");
-
-//   const [errors, setErrors] = useState([]);
-//   const [isLoading, setIsLoading] = useState(false);
-
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//     setErrors([]);
-//     setIsLoading(true);
-//     fetch("/signup", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         username,
-//         password,
-//         password_confirmation: passwordConfirmation,
-//         first_name: firstName,
-//         last_name: lastName,
-//       }),
-//     }).then((r) => {
-//       setIsLoading(false);
-//       if (r.ok) {
-//         r.json().then((user) => {
-//           alert("success");
-//           loginSound();
-//           onLogin(user);
-//         });
-//       } else {
-//         r.json().then((err) => {
-//           errorSound();
-//           setErrors(err.errors);
-//         });
-//       }
-//     });
-//   }
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <label>
-//         first name
-//         <input
-//           type="text"
-//           name="first-name"
-//           value={firstName}
-//           onChange={(e) => setFirstName(e.target.value)}
-//         />
-//       </label>
-//       <label>
-//         last name
-//         <input
-//           type="text"
-//           name="last-name"
-//           value={lastName}
-//           onChange={(e) => setLastName(e.target.value)}
-//         />
-//       </label>
-//       <label>
-//         username:
-//         <input
-//           type="text"
-//           name="username"
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//         />
-//       </label>
-//       <label>
-//         password:
-//         <input
-//           type="password"
-//           name="password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-//       </label>
-//       <label>
-//         password!:
-//         <input
-//           type="password"
-//           name="pass-confirmation"
-//           value={passwordConfirmation}
-//           onChange={(e) => setPasswordConfirmation(e.target.value)}
-//         />
-//       </label>
-//       <input type="submit" value="Submit" />
-//     </form>
-//   );
-// };
-
-// export default SignUpForm;
 import * as React from "react";
 import useState from "react";
 import Avatar from "@mui/material/Avatar";
@@ -121,8 +23,8 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://willyu.netlify.com/">
+        BOT.IO
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -130,7 +32,11 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Press Start 2P", "cursive"].join(","),
+  },
+});
 
 function SignUpForm({
   onLogin,

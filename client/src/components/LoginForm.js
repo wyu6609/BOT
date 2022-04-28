@@ -1,67 +1,3 @@
-// import { React, useState } from "react";
-// import "./Forms.css";
-// const LoginForm = ({ onLogin, loginSound, errorSound }) => {
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [errors, setErrors] = useState([]);
-//   const [isLoading, setIsLoading] = useState(false);
-
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//     setIsLoading(true);
-//     fetch("/login", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ username, password }),
-//     }).then((r) => {
-//       setIsLoading(false);
-//       if (r.ok) {
-//         r.json().then((user) => {
-//           alert("ACCESS GRANTED");
-//           loginSound();
-//           onLogin(user);
-//         });
-//       } else {
-//         r.json().then((err) => {
-//           alert("ACCESS DENIED");
-//           errorSound();
-//           setErrors(err.errors);
-//         });
-//       }
-//     });
-//   }
-//   return (
-//     <div>
-//       <form className="login-form" onSubmit={handleSubmit}>
-//         <label>
-//           username:
-//           <input
-//             type="text"
-//             name="name"
-//             value={username}
-//             onChange={(e) => setUsername(e.target.value)}
-//           />
-//         </label>
-//         <label>
-//           password:
-//           <input
-//             type="password"
-//             name="name"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//           />
-//         </label>
-//         <button className="login-submit" type="submit">
-//           Submit
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default LoginForm;
 import * as React from "react";
 import useState from "react";
 import Avatar from "@mui/material/Avatar";
@@ -96,7 +32,11 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Press Start 2P", "cursive"].join(","),
+  },
+});
 
 function LoginForm({
   onLogin,
@@ -122,13 +62,11 @@ function LoginForm({
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          alert("ACCESS GRANTED");
           loginSound();
           onLogin(user);
         });
       } else {
         r.json().then((err) => {
-          alert("ACCESS DENIED");
           errorSound();
         });
       }

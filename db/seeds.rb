@@ -20,11 +20,11 @@ puts 'seeding User...'
   )
 end
 puts 'seeding Product...'
-25.times do
+250.times do
   seed = Faker::Number.between(from: 1, to: 10_000)
 
   Product.create(
-    title: Faker::Commerce.material,
+    title: Faker::Name.unique.name,
     description: Faker::Lorem.paragraph,
     category: Faker::Lorem.word,
     price: Faker::Commerce.price,
@@ -34,7 +34,7 @@ end
 
 puts 'seeding Review...'
 
-25.times do
+250.times do
   Review.create(
     content: Faker::Quote.famous_last_words,
     rating: Faker::Number.between(from: 1, to: 5),

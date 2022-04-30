@@ -5,6 +5,7 @@ import SignUpForm from "../components/SignUpForm";
 import "./Login.css";
 
 const Login = ({ onLogin }) => {
+  let seed = Math.floor(Math.random() * 1000) + 1;
   const [showLogin, setShowLogin] = useState(true);
   //   logout
 
@@ -27,7 +28,7 @@ const Login = ({ onLogin }) => {
     <div>
       <div className="split left">
         <div className="centered">
-          <h1 className="login-title">BOT</h1>
+          <h1 className="login-title">BOT_IO</h1>
           {showLogin ? (
             <>
               <LoginForm
@@ -59,8 +60,8 @@ const Login = ({ onLogin }) => {
             className="login-img floating"
             src={
               showLogin
-                ? "https://avatars.dicebear.com/api/bottts/yellow.svg"
-                : "https://avatars.dicebear.com/api/bottts/angry.svg"
+                ? `https://avatars.dicebear.com/api/bottts/yellow.svg`
+                : `https://avatars.dicebear.com/api/bottts/${seed}.svg`
             }
           />
         </div>

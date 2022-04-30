@@ -38,10 +38,6 @@ const payments = [
 ];
 
 export default function Review() {
-  const checkOutSuccessSound = () => {
-    let checkOutAudio = new Audio("/sounds/purchased-sound.mp3");
-    checkOutAudio.play();
-  };
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

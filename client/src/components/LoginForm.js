@@ -13,6 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useHistory } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -46,6 +47,7 @@ function LoginForm({
   errorSound,
   signUpSound,
 }) {
+  const history = useHistory();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -64,6 +66,7 @@ function LoginForm({
         r.json().then((user) => {
           loginSound();
           onLogin(user);
+          history.push("/");
         });
       } else {
         r.json().then((err) => {
@@ -104,7 +107,6 @@ function LoginForm({
               id="username"
               label="username"
               name="username"
-              autoComplete="email"
               autoFocus
             />
             <TextField
@@ -115,7 +117,6 @@ function LoginForm({
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
             />
 
             <Button

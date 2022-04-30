@@ -1,5 +1,5 @@
 #container {
-  height: 800px;
+  min-height: calc(100vh - 130px);
   position: relative;
   overflow: hidden;
 }
@@ -19,7 +19,7 @@
 
 .photobanner {
   position: absolute;
-  top: 0px;
+  top: 50px;
   left: 0px;
   overflow: hidden;
   white-space: nowrap;

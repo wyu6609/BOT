@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import "./Footer.css";
 function Copyright() {
   return (
     <Typography variant="body2" color="#FFFFFF">
@@ -33,7 +33,8 @@ export default function StickyFooter() {
             color: "white",
             py: 3,
             px: 2,
-            mt: "auto",
+            mb: "auto",
+
             backgroundColor: "primary.main",
           }}
         >

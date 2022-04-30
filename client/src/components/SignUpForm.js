@@ -42,10 +42,13 @@ function SignUpForm({
   onLogin,
   showLogin,
   setShowLogin,
-  loginSound,
-  errorSound,
   signUpSound,
+  errorSound,
 }) {
+  const signSound = () => {
+    let signUpAudio = new Audio("/sounds/signup.mp3");
+    signUpAudio.play();
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -70,9 +73,11 @@ function SignUpForm({
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          alert("success");
-          loginSound();
-          onLogin(user);
+          signSound();
+          // onLogin(user);
+          setTimeout(function () {
+            setShowLogin(true);
+          }, 500);
         });
       } else {
         r.json().then((err) => {

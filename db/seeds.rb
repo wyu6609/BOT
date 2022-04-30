@@ -10,8 +10,24 @@ User.destroy_all
 Product.destroy_all
 Review.destroy_all
 
+puts 'seeding categories'
+
+Category.create(name: 'Pre-Programmed')
+Category.create(name: 'Humanoid')
+Category.create(name: 'Autonomous')
+Category.create(name: 'Teleoperated')
+Category.create(name: 'Augmenting')
+
 puts 'seeding User...'
-25.times do
+
+User.create(
+  first_name: 'admin',
+  last_name: 'admin',
+  username: 'admin',
+  password_digest: BCrypt::Password.create('admin'),
+)
+
+5.times do
   User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -26,7 +42,7 @@ puts 'seeding Product...'
   Product.create(
     title: Faker::Name.unique.name,
     description: Faker::Lorem.paragraph,
-    category: Faker::Lorem.word,
+    category_id: Category.ids.sample,
     price: Faker::Commerce.price,
     image: "https://avatars.dicebear.com/api/bottts/#{seed}.svg",
   )
@@ -36,7 +52,7 @@ puts 'seeding Review...'
 
 250.times do
   Review.create(
-    content: Faker::Quote.famous_last_words,
+    description: Faker::Quote.famous_last_words,
     rating: Faker::Number.between(from: 1, to: 5),
     user_id: User.ids.sample,
     product_id: Product.ids.sample,

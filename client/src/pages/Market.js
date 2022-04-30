@@ -19,36 +19,102 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReactPaginate from "react-paginate";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
-import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
+
+import CategoryMenu from "../components/CategoryMenu";
+import { useHistory } from "react-router-dom";
+
 const theme = createTheme({
   typography: {
     fontFamily: ["Press Start 2P", "cursive"].join(","),
   },
 });
 
-function Market() {
+function Market({ bot, setBot }) {
+  const history = useHistory();
+  const options = [
+    "All",
+    "Pre-Programmed",
+    "Humanoid",
+    "Autonomous",
+    "Teleoperated",
+    "Augmenting",
+  ];
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [botList, setBotList] = useState([]);
+
   useEffect(() => {
     fetch("/products")
       .then((r) => r.json())
       .then((products) => {
+        console.log(products);
         setBotList(products);
       });
   }, []);
+
   const [pageNumber, setPageNumber] = useState(0);
   const botsPerPage = 9;
   const pagesVisited = pageNumber * botsPerPage;
-  const displayBots = botList.slice(pagesVisited, pagesVisited + botsPerPage);
-  const pageCount = Math.ceil(botList.length / botsPerPage);
+
+  const [filteredBotList, setFilteredBotList] = useState(botList);
+  useEffect(() => {
+    filterHandler();
+  }, [botList, selectedIndex]);
+  const filterHandler = () => {
+    switch (selectedIndex) {
+      case 1:
+        setFilteredBotList(
+          botList.filter((bot) => bot.category.name === "Pre-Programmed")
+        );
+        break;
+      case 2:
+        setFilteredBotList(
+          botList.filter((bot) => bot.category.name === "Humanoid")
+        );
+        break;
+      case 3:
+        setFilteredBotList(
+          botList.filter((bot) => bot.category.name === "Autonomous")
+        );
+        break;
+      case 4:
+        setFilteredBotList(
+          botList.filter((bot) => bot.category.name === "Teleoperated")
+        );
+        break;
+      case 5:
+        setFilteredBotList(
+          botList.filter((bot) => bot.category.name === "Augmenting")
+        );
+        break;
+      default:
+        setFilteredBotList(botList);
+        break;
+    }
+  };
+
+  const displayBots = filteredBotList.slice(
+    pagesVisited,
+    pagesVisited + botsPerPage
+  );
+
+  const pageCount = Math.ceil(filteredBotList.length / botsPerPage);
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+
+  const clickCardHandler = (bot) => {
+    setBot(bot);
+    history.push("/bot");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
 
       <main>
         {/* Hero unit */}
+
         <Box
           sx={{
             bgcolor: "background.paper",
@@ -79,10 +145,21 @@ function Market() {
         </Box>
         <Container sx={{ py: 5 }} maxWidth="md">
           {/* End hero unit */}
+
+          <div className="bot-grid">
+            <CategoryMenu
+              selectedIndex={selectedIndex}
+              setSelectedIndex={setSelectedIndex}
+              options={options}
+            />
+          </div>
           <Grid container spacing={4}>
             {displayBots.map((bot) => (
               <Grid item key={bot} xs={12} sm={6} md={4}>
                 <Card
+                  onClick={() => {
+                    clickCardHandler(bot);
+                  }}
                   className="fancy_card"
                   sx={{
                     height: "100%",
@@ -105,18 +182,24 @@ function Market() {
                     </Typography>
                     <Typography component="h3">{bot.description}</Typography>
                   </CardContent>
-
+                  <Typography
+                    sx={{ color: "#fd5d77" }}
+                    size="small"
+                    component="p"
+                    align="center"
+                  >
+                    {bot.category.name}
+                  </Typography>
                   <CardActions>
                     <IconButton size="small" sx={{ color: "#3794ff" }}>
                       <AddShoppingCartRoundedIcon />
                     </IconButton>
-                    <IconButton size="small">
-                      <PreviewOutlinedIcon sx={{ color: "#fde65d" }} />
-                    </IconButton>
+
                     <Typography
                       sx={{
                         mx: "auto",
                       }}
+                      align="right"
                       color="#47c758"
                     >
                       ETH{bot.price}

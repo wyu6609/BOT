@@ -19,7 +19,7 @@ const Home = () => {
     <div id="container">
       <h1 className="home-header ">BOT.IO</h1>
       <p className="home-p vibrate-1">check the bot market!</p>
-      <div class="photobanner">{imgBots}</div>
+      <div className="photobanner">{imgBots}</div>
     </div>
   );
 };

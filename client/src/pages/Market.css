@@ -3,6 +3,7 @@
   box-shadow: 8px 28px 50px rgba(39, 44, 49, 0.07),
     1px 6px 12px rgba(39, 44, 49, 0.04);
   transition: all 0.4s ease;
+  background-color: #d9edfd;
 }
 
 .fancy_card {
@@ -38,4 +39,7 @@
 }
 .price {
   margin-left: 10px;
+}
+.bot-grid {
+  padding-bottom: 30px;
 }

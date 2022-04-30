@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import "./Home.css";
 
 const Home = () => {
-  let seed = Math.floor(Math.random() * 1000) + 1;
+ 
   const [botImgList, setBotImgList] = useState([]);
   useEffect(() => {
     fetch("/products")

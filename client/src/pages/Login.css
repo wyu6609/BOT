@@ -62,3 +62,22 @@
     transform: translate(0, -0px);
   }
 }
+
+@media (max-width: 900px) {
+  .right {
+    display: none;
+  }
+  .split {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  .login-title {
+    padding-top: 100px;
+    text-align: center;
+  }
+}

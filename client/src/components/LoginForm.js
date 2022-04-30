@@ -1,5 +1,5 @@
 import * as React from "react";
-import useState from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -76,6 +76,30 @@ function LoginForm({
     });
   };
 
+  const handleDemoLogin = () => {
+    let username = "admin";
+    let password = "admin";
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((user) => {
+          loginSound();
+          onLogin(user);
+          history.push("/");
+        });
+      } else {
+        r.json().then((err) => {
+          errorSound();
+        });
+      }
+    });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -117,6 +141,7 @@ function LoginForm({
               label="Password"
               type="password"
               id="password"
+              autocomplete="new-password"
             />
 
             <Button
@@ -129,6 +154,7 @@ function LoginForm({
             </Button>
             <Grid container>
               <Grid item xs></Grid>
+
               <Grid item>
                 <Link
                   href="#"
@@ -144,7 +170,19 @@ function LoginForm({
             </Grid>
           </Box>
         </Box>
+
         <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Link
+          href="#"
+          align="center"
+          sx={{ color: "#fd5d77" }}
+          variant="p"
+          onClick={() => {
+            handleDemoLogin();
+          }}
+        >
+          {"Demo Login"}
+        </Link>
       </Container>
     </ThemeProvider>
   );

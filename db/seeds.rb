@@ -21,8 +21,8 @@ Category.create(name: 'Augmenting')
 puts 'seeding User...'
 
 User.create(
-  first_name: 'admin',
-  last_name: 'admin',
+  first_name: 'john',
+  last_name: 'smith',
   username: 'admin',
   password_digest: BCrypt::Password.create('admin'),
 )

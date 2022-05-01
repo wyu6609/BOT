@@ -5,14 +5,14 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import Typewriter from "typewriter-effect";
 import IconButton from "@mui/material/IconButton";
 import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LocalConvenienceStoreOutlinedIcon from "@mui/icons-material/LocalConvenienceStoreOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
-function NavBar({ setUser, marketBlink, setMarketBlink }) {
+function NavBar({ setUser, user, marketBlink, setMarketBlink }) {
   const logoutSound = () => {
     let logoutAudio = new Audio("/sounds/logout-sound.mp3");
     logoutAudio.play();
@@ -75,6 +75,21 @@ function NavBar({ setUser, marketBlink, setMarketBlink }) {
               <LocalConvenienceStoreOutlinedIcon />
             </IconButton>
           </Typography>
+          <Typewriter
+            options={{
+              autoStart: true,
+              loop: true,
+            }}
+            onInit={(typewriter) => {
+              typewriter
+                .typeString(`welcome ${user.first_name} ${user.last_name}!`)
+                .pauseFor(2000)
+                .deleteAll()
+                .typeString(`your username: ${user.username}`)
+                .pauseFor(2000)
+                .start();
+            }}
+          />
           <IconButton
             color="inherit"
             className={marketBlink ? "" : "blink-1"}

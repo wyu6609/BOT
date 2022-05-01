@@ -30,6 +30,7 @@ function BotPage({ bot }) {
     <ThemeProvider theme={theme}>
       <GlobalStyles
         styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
+        
       />
       <CssBaseline />
 
@@ -57,14 +58,8 @@ function BotPage({ bot }) {
         </Typography>
       </Container>
       {/* End hero unit */}
-      <Container maxWidth="md" component="main">
-        <Grid
-          container
-          item
-          xs={12}
-          alignItems="center"
-          justifyContent="center"
-        >
+      <Container maxWidth="sm" component="main">
+        <Grid container item alignItems="center" justifyContent="center">
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
             <Grid alignItems="center">
@@ -90,7 +85,7 @@ function BotPage({ bot }) {
                     component="img"
                     sx={{
                       // 16:9
-                      pt: "5%",
+                      pt: "2%",
                     }}
                     image={bot.image}
                     alt="random"

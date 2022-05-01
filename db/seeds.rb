@@ -43,7 +43,7 @@ puts 'seeding Product...'
     title: Faker::Name.unique.name,
     description: Faker::Lorem.paragraph,
     category_id: Category.ids.sample,
-    price: Faker::Commerce.price,
+    price: Faker::Commerce.price(range: 0.0..10.0),
     image: "https://avatars.dicebear.com/api/bottts/#{seed}.svg",
   )
 end

@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    render json: Product.all
+    products = Product.all.order(price: :asc)
+    render json: products
   end
 end

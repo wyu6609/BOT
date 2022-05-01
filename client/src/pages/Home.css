@@ -5,7 +5,7 @@
 }
 .home-header {
   color: #1976d2;
-  margin-top: 80px;
+  margin-top: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,6 +24,7 @@
   overflow: hidden;
   white-space: nowrap;
   animation: bannermove 600s linear infinite;
+  -webkit-animation: bannermove 600s linear infinite;
 }
 
 .photobanner img {
@@ -35,9 +36,13 @@
 }
 @keyframes bannermove {
   0% {
+    -webkit-transform: translate(0, 0);
+    -webkit-transform: -webkit-translate(0, 0);
     transform: translate(0, 0);
   }
   100% {
+    -webkit-transform: translate(-50%, 0);
+    -webkit-transform: -webkit-translate(-50%, 0);
     transform: translate(-50%, 0);
   }
 }
@@ -51,12 +56,15 @@
 
 @keyframes pulse {
   0% {
+    -webkit-transform: scale(1);
     transform: scale(1);
   }
   50% {
+    -webkit-transform: scale(1.07);
     transform: scale(1.07);
   }
   100% {
+    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
@@ -72,12 +80,15 @@
 
 @keyframes floating {
   0% {
+    -webkit-transform: translate(0, 0px);
     transform: translate(0, 0px);
   }
   50% {
+    -webkit-transform: translate(0, 15px);
     transform: translate(0, 15px);
   }
   100% {
+    -webkit-transform: translate(0, -0px);
     transform: translate(0, -0px);
   }
 }
@@ -119,7 +130,7 @@
     transform: translate(0);
   }
 }
-@keyframes vibrate-1 {
+@-webkit-keyframes vibrate-1 {
   0% {
     -webkit-transform: translate(0);
     transform: translate(0);

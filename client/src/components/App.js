@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Login from "../pages/Login";
@@ -15,7 +15,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [marketBlink, setMarketBlink] = useState(true);
   const [bot, setBot] = useState(null);
-  const history = useHistory();
+
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {

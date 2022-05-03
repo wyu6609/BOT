@@ -20,7 +20,7 @@ const Home = () => {
 
       <div id="container">
         <h1 className="home-header ">BOT.IO</h1>
-        <p className="home-p vibrate-1">check the bot market!</p>
+        <p className="home-p vibrate-3">check the bot market!</p>
         <div className="photobanner">{imgBots}</div>
       </div>
     </>

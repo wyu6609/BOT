@@ -50,7 +50,7 @@ end
 
 puts 'seeding Review...'
 
-250.times do
+500.times do
   Review.create(
     description: Faker::Quote.famous_last_words,
     rating: Faker::Number.between(from: 1, to: 5),

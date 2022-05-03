@@ -23,20 +23,19 @@ ActiveRecord::Schema.define(version: 2022_04_29_132732) do
 
   create_table "line_items", force: :cascade do |t|
     t.integer "quantity"
+    t.integer "item_price"
+    t.integer "total_price"
     t.bigint "product_id"
-    t.bigint "shopping_cart_id"
     t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_line_items_on_order_id"
     t.index ["product_id"], name: "index_line_items_on_product_id"
-    t.index ["shopping_cart_id"], name: "index_line_items_on_shopping_cart_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.string "username"
-    t.string "first_name"
-    t.string "last_name"
+    t.string "stripe_charge_id"
     t.integer "total_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
@@ -22,15 +22,23 @@ const theme = createTheme({
     fontFamily: ["Press Start 2P", "cursive"].join(","),
   },
 });
-
+//get all the reviews for this bot
+// includes user name fo reach bot
 function BotPage({ bot }) {
+  useEffect(() => {
+    fetch(`/products/${bot.id}`)
+      .then((r) => r.json())
+      .then((products) => {
+        console.log(products.reviews);
+      });
+  }, []);
+
   const tiers = [bot];
   console.log(bot);
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles
         styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
-        
       />
       <CssBaseline />
 

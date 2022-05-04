@@ -27,11 +27,11 @@ User.create(
   password_digest: BCrypt::Password.create('admin'),
 )
 
-5.times do
+100.times do
   User.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    username: Faker::Internet.user_name,
+    username: Faker::Internet.unique.user_name,
     password_digest: BCrypt::Password.create(Faker::Bank.account_number),
   )
 end
@@ -50,7 +50,7 @@ end
 
 puts 'seeding Review...'
 
-500.times do
+1000.times do
   Review.create(
     description: Faker::Quote.famous_last_words,
     rating: Faker::Number.between(from: 1, to: 5),

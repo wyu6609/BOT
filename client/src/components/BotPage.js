@@ -16,25 +16,40 @@ import IconButton from "@mui/material/IconButton";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import ReviewDrawer from "./ReviewDrawerComponents/ReviewDrawer";
+import AverageBotRating from "./ReviewDrawerComponents/AverageBotRating";
 const theme = createTheme({
   typography: {
     fontFamily: ["Press Start 2P", "cursive"].join(","),
   },
 });
+
 //get all the reviews for this bot
-// includes user name fo reach bot
-function BotPage({ bot }) {
+// includes user name fo reach bo
+function BotPage({ bot, user }) {
+  const [reviews, setReviews] = useState([]);
+  const [averageRating, setAverageRating] = useState("");
+  const [userReview, setUserReview] = useState("");
+
   useEffect(() => {
     fetch(`/products/${bot.id}`)
       .then((r) => r.json())
       .then((products) => {
-        console.log(products.reviews);
+        setReviews(products.reviews);
       });
   }, []);
 
+  useEffect(() => {
+    let average =
+      reviews.reduce((total, next) => total + next.rating, 0) / reviews.length;
+
+    let roundedAverage = Math.round(average / 0.5) * 0.5;
+
+    setAverageRating(roundedAverage);
+  }, [reviews]);
+
   const tiers = [bot];
-  console.log(bot);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles
@@ -45,17 +60,19 @@ function BotPage({ bot }) {
       {/* Hero unit */}
       <Container
         disableGutters
-        maxWidth="sm"
+        maxWidth="large"
         component="main"
-        sx={{ pt: 8, pb: 6 }}
+        sx={{ pt: 4, pb: 4 }}
       >
         <Typography
-          component="h1"
+          component="h2"
           variant="h2"
           align="center"
-          color="text.primary"
+          color="#3794ff"
           gutterBottom
-        ></Typography>
+        >
+          {bot.title}
+        </Typography>
         <Typography
           variant="h5"
           align="center"
@@ -66,7 +83,7 @@ function BotPage({ bot }) {
         </Typography>
       </Container>
       {/* End hero unit */}
-      <Container maxWidth="sm" component="main">
+      <Container maxWidth="xs" component="main">
         <Grid container item alignItems="center" justifyContent="center">
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
@@ -105,16 +122,7 @@ function BotPage({ bot }) {
                       alignItems: "baseline",
                       mb: 2,
                     }}
-                  >
-                    <Typography
-                      component="h2"
-                      variant="h3"
-                      color="text.primary"
-                      align="center"
-                    >
-                      {bot.title}
-                    </Typography>
-                  </Box>
+                  ></Box>
                   <Box
                     sx={{
                       display: "flex",
@@ -124,8 +132,8 @@ function BotPage({ bot }) {
                     }}
                   >
                     <Typography
-                      component="h2"
-                      variant="h3"
+                      component="p"
+                      variant="h5"
                       color="#fd5d77"
                       align="center"
                     >
@@ -133,10 +141,19 @@ function BotPage({ bot }) {
                     </Typography>
                   </Box>
                 </CardContent>
-                <CardActions>
+                <CardActions
+                  sx={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <IconButton sx={{ color: "#3794ff" }}>
                     <AddShoppingCartRoundedIcon size="large" />
                   </IconButton>
+                  <AverageBotRating value={averageRating} />
+                  <ReviewDrawer
+                    bot_id={bot.id}
+                    user_id={user.id}
+                    reviews={reviews}
+                    setReviews={setReviews}
+                  />
                 </CardActions>
               </Card>
             </Grid>
@@ -154,6 +171,7 @@ function BotPage({ bot }) {
       >
         <Grid container spacing={4} justifyContent="space-evenly"></Grid>
       </Container>
+
       {/* End footer */}
     </ThemeProvider>
   );

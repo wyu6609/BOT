@@ -73,6 +73,7 @@
   background-color: #1976d2;
 }
 .bot-grid {
-  margin-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
 }

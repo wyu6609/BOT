@@ -38,6 +38,7 @@ function NavBar({ setUser, user, marketBlink, setMarketBlink }) {
       }
     });
   }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -82,11 +83,12 @@ function NavBar({ setUser, user, marketBlink, setMarketBlink }) {
             }}
             onInit={(typewriter) => {
               typewriter
-                .typeString(`welcome ${user.first_name} ${user.last_name}!`)
-                .pauseFor(2000)
+                .typeString(`welcome ${user.first_name}!`)
+                .pauseFor(10000)
                 .deleteAll()
-                .typeString(`your username: ${user.username}`)
-                .pauseFor(2000)
+                .typeString(`username: ${user.username}`)
+                .pauseFor(10000)
+
                 .start();
             }}
           />

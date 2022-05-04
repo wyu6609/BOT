@@ -44,7 +44,7 @@ function App() {
             <Market bot={bot} setBot={setBot} />
           </Route>
           <Route path="/bot">
-            <BotPage bot={bot} />
+            <BotPage bot={bot} user={user} />
           </Route>
           <Route path="/checkout">
             <Checkout />

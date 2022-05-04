@@ -47,19 +47,22 @@ function Market({ bot, setBot }) {
     fetch("/products")
       .then((r) => r.json())
       .then((products) => {
-        console.log(products);
         setBotList(products);
       });
   }, []);
 
   const [pageNumber, setPageNumber] = useState(0);
-  const botsPerPage = 9;
+  const botsPerPage = 12;
   const pagesVisited = pageNumber * botsPerPage;
-
+  const pageChangeSound = () => {
+    let pageChangeAudio = new Audio("/sounds/page-change-sound.mp3");
+    pageChangeAudio.play();
+  };
   const [filteredBotList, setFilteredBotList] = useState(botList);
   useEffect(() => {
     filterHandler();
   }, [botList, selectedIndex]);
+
   const filterHandler = () => {
     switch (selectedIndex) {
       case 1:
@@ -140,11 +143,11 @@ function Market({ bot, setBot }) {
                 color="text.secondary"
                 paragraph
               >
-                Why do it yourself when you can do it with a bot?
+                buy a bot
               </Typography>
             </Container>
           </Box>
-          <Container sx={{ py: 5 }} maxWidth="md">
+          <Container sx={{ pb: 5 }} maxWidth="medium">
             {/* End hero unit */}
 
             <div className="bot-grid">
@@ -154,12 +157,13 @@ function Market({ bot, setBot }) {
                 options={options}
               />
             </div>
-            <Grid container spacing={4}>
+            <Grid container spacing={2}>
               {displayBots.map((bot) => (
-                <Grid item key={bot} xs={12} sm={6} md={4}>
+                <Grid item key={bot} xs={12} sm={6} md={3}>
                   <Card
                     onClick={() => {
                       clickCardHandler(bot);
+                      pageChangeSound();
                     }}
                     className="fancy_card"
                     sx={{
@@ -221,6 +225,9 @@ function Market({ bot, setBot }) {
           </Container>
         </main>
         <ReactPaginate
+          onClick={() => {
+            pageChangeSound();
+          }}
           previousLabel={
             <svg
               stroke="currentColor"
